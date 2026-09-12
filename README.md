@@ -1,5 +1,7 @@
 # RecipeBox – Instagram for Foodies (MERN Stack)
 
+🌐 **Live Demo / Deployment**: [https://receipt-box-client.vercel.app](https://receipt-box-client.vercel.app)
+
 RecipeBox is a modern, responsive, and visual social sharing platform for food enthusiasts. Built on the **MERN Stack** (MongoDB, Express.js, React, Node.js), it combines clean recipe sharing with a social-media-style experience. Users can register accounts, upload food photography, follow other chefs, save recipes to personal cookbooks, and plan weekly meals with an interactive drag-and-drop calendar planner.
 
 ---
