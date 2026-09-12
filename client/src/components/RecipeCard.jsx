@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Star, Clock, Activity, User } from 'lucide-react';
+import { getImageUrl } from '../services/api';
 
 export default function RecipeCard({ recipe }) {
   const {
@@ -16,8 +17,8 @@ export default function RecipeCard({ recipe }) {
     tags,
   } = recipe;
 
-  // Format image URL to support relative fallback path
-  const imageSrc = imageUrl.startsWith('http') ? imageUrl : `http://localhost:5000${imageUrl}`;
+  // Format image URL using getImageUrl helper
+  const imageSrc = getImageUrl(imageUrl, 'https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=600');
 
   return (
     <div className="group bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 animate-fade-in flex flex-col h-full">
@@ -87,7 +88,7 @@ export default function RecipeCard({ recipe }) {
             {author ? (
               <Link to={`/profile/${author.username}`} className="flex items-center gap-2 group/author">
                 <img
-                  src={author.avatar ? (author.avatar.startsWith('http') ? author.avatar : `http://localhost:5000${author.avatar}`) : 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100'}
+                  src={getImageUrl(author.avatar, 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100')}
                   alt={author.username}
                   className="h-6 w-6 rounded-full object-cover ring-1 ring-slate-100 dark:ring-slate-800"
                 />

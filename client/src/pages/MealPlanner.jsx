@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import api from '../services/api';
+import api, { getImageUrl } from '../services/api';
 import { toast } from '../components/Toast';
 import { Link } from 'react-router-dom';
 import {
@@ -228,7 +228,7 @@ export default function MealPlanner() {
                   className="flex gap-3 bg-slate-50 dark:bg-slate-950/40 border border-slate-100 dark:border-slate-850 p-2.5 rounded-xl cursor-grab active:cursor-grabbing hover:border-slate-300 dark:hover:border-slate-750 transition-all select-none group relative"
                 >
                   <img
-                    src={recipe.imageUrl.startsWith('http') ? recipe.imageUrl : `http://localhost:5000${recipe.imageUrl}`}
+                    src={getImageUrl(recipe.imageUrl, 'https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=300')}
                     alt={recipe.title}
                     className="h-11 w-11 rounded-lg object-cover shrink-0 bg-slate-100"
                   />
@@ -326,7 +326,7 @@ export default function MealPlanner() {
                               >
                                 <Link to={`/recipes/${recipe._id}`} className="block h-16 rounded-lg overflow-hidden bg-slate-150 mb-1">
                                   <img
-                                    src={recipe.imageUrl.startsWith('http') ? recipe.imageUrl : `http://localhost:5000${recipe.imageUrl}`}
+                                    src={getImageUrl(recipe.imageUrl, 'https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=300')}
                                     alt={recipe.title}
                                     className="h-full w-full object-cover"
                                   />

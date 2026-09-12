@@ -1,9 +1,23 @@
 import axios from 'axios';
 
 const rawApiUrl = import.meta.env.VITE_API_URL || '';
-const baseURL = rawApiUrl
+
+export const SERVER_URL = rawApiUrl
+  ? rawApiUrl.replace(/\/api\/?$/, '')
+  : '';
+
+export const baseURL = rawApiUrl
   ? (rawApiUrl.endsWith('/api') ? rawApiUrl : `${rawApiUrl.replace(/\/$/, '')}/api`)
   : '/api';
+
+export const getImageUrl = (path, fallback = '') => {
+  if (!path) return fallback;
+  if (path.startsWith('http://') || path.startsWith('https://') || path.startsWith('data:')) {
+    return path;
+  }
+  const cleanPath = path.startsWith('/') ? path : `/${path}`;
+  return SERVER_URL ? `${SERVER_URL}${cleanPath}` : cleanPath;
+};
 
 const api = axios.create({
   baseURL,

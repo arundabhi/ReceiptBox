@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
+import { getImageUrl } from '../services/api';
 import {
   Compass,
   Search,
@@ -98,7 +99,7 @@ export default function Navbar() {
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
                   <img
-                    src={user.avatar ? (user.avatar.startsWith('http') ? user.avatar : `http://localhost:5000${user.avatar}`) : 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100'}
+                    src={getImageUrl(user.avatar, 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100')}
                     alt={user.username}
                     className="h-10 w-10 rounded-full object-cover"
                   />
@@ -172,7 +173,7 @@ export default function Navbar() {
             <div className="space-y-3">
               <Link to={`/profile/${user.username}`} className="flex items-center gap-3 p-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors group">
                 <img
-                  src={user.avatar ? (user.avatar.startsWith('http') ? user.avatar : `http://localhost:5000${user.avatar}`) : 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100'}
+                  src={getImageUrl(user.avatar, 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100')}
                   alt={user.username}
                   className="h-10 w-10 rounded-full object-cover ring-2 ring-slate-100 dark:ring-slate-800"
                 />

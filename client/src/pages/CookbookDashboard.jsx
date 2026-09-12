@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import api from '../services/api';
+import api, { getImageUrl } from '../services/api';
 import { toast } from '../components/Toast';
 import { FolderHeart, Plus, Trash2, BookOpen, Utensils, X } from 'lucide-react';
 
@@ -187,7 +187,7 @@ export default function CookbookDashboard() {
                       <div key={recipe._id} className="relative group bg-slate-50 dark:bg-slate-950/20 border border-slate-100 dark:border-slate-850 p-3 rounded-2xl flex gap-3 hover:shadow-md transition-shadow">
                         <Link to={`/recipes/${recipe._id}`} className="block h-16 w-16 rounded-xl overflow-hidden shrink-0 bg-slate-100">
                           <img
-                            src={recipe.imageUrl.startsWith('http') ? recipe.imageUrl : `http://localhost:5000${recipe.imageUrl}`}
+                            src={getImageUrl(recipe.imageUrl, 'https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=300')}
                             alt={recipe.title}
                             className="h-full w-full object-cover"
                           />

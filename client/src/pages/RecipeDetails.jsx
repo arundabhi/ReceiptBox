@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAuth } from '../context/AuthContext';
-import api from '../services/api';
+import api, { getImageUrl } from '../services/api';
 import { toast } from '../components/Toast';
 import {
   Clock,
@@ -151,7 +151,7 @@ export default function RecipeDetails() {
   const { recipe, comments } = data;
   const isAuthor = currentUser && recipe.author._id.toString() === currentUser.id;
 
-  const imageSrc = recipe.imageUrl.startsWith('http') ? recipe.imageUrl : `http://localhost:5000${recipe.imageUrl}`;
+  const imageSrc = getImageUrl(recipe.imageUrl, 'https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=800');
 
   const toggleIngredient = (idx) => {
     setCheckedIngredients((prev) => ({ ...prev, [idx]: !prev[idx] }));
@@ -221,7 +221,7 @@ export default function RecipeDetails() {
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-6 border-b border-slate-50 dark:border-slate-850/60">
             <Link to={`/profile/${recipe.author.username}`} className="flex items-center gap-3 group">
               <img
-                src={recipe.author.avatar ? (recipe.author.avatar.startsWith('http') ? recipe.author.avatar : `http://localhost:5000${recipe.author.avatar}`) : 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100'}
+                src={getImageUrl(recipe.author.avatar, 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100')}
                 alt={recipe.author.username}
                 className="h-11 w-11 rounded-full object-cover ring-2 ring-slate-100 dark:ring-slate-800"
               />
@@ -455,7 +455,7 @@ export default function RecipeDetails() {
               const isCommentOwner = currentUser && comment.user._id.toString() === currentUser.id;
               const isCommentRecipeOwner = currentUser && recipe.author._id.toString() === currentUser.id;
               
-              const commentAvatar = comment.user.avatar ? (comment.user.avatar.startsWith('http') ? comment.user.avatar : `http://localhost:5000${comment.user.avatar}`) : 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100';
+              const commentAvatar = getImageUrl(comment.user.avatar, 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100');
 
               return (
                 <div key={comment._id} className="flex gap-3 bg-slate-50 dark:bg-slate-950/20 border border-slate-100 dark:border-slate-850 p-4 rounded-2xl group/comment">

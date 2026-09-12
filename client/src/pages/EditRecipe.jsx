@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { useDropzone } from 'react-dropzone';
-import api from '../services/api';
+import api, { getImageUrl } from '../services/api';
 import { toast } from '../components/Toast';
 import { Plus, Trash2, Camera, Clock, Utensils, Award, Save, Sparkles } from 'lucide-react';
 
@@ -61,7 +61,7 @@ export default function EditRecipe() {
 
       setIngredients(recipe.ingredients);
       setInstructions(recipe.instructions);
-      setImagePreview(recipe.imageUrl.startsWith('http') ? recipe.imageUrl : `http://localhost:5000${recipe.imageUrl}`);
+      setImagePreview(getImageUrl(recipe.imageUrl));
     }
   }, [recipeData]);
 

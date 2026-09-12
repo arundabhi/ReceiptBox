@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAuth } from '../context/AuthContext';
-import api from '../services/api';
+import api, { getImageUrl } from '../services/api';
 import RecipeCard from '../components/RecipeCard';
 import { ProfileSkeleton } from '../components/SkeletonLoader';
 import { toast } from '../components/Toast';
@@ -97,7 +97,7 @@ export default function Profile() {
     }
   };
 
-  const userAvatar = user.avatar ? (user.avatar.startsWith('http') ? user.avatar : `http://localhost:5000${user.avatar}`) : 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150';
+  const userAvatar = getImageUrl(user.avatar, 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150');
 
   return (
     <div className="max-w-4xl mx-auto px-6 py-10 animate-fade-in space-y-8">
@@ -213,7 +213,7 @@ export default function Profile() {
                     className="flex items-center gap-3 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 p-4 rounded-2xl hover:shadow-md transition-shadow"
                   >
                     <img
-                      src={fUser.avatar ? (fUser.avatar.startsWith('http') ? fUser.avatar : `http://localhost:5000${fUser.avatar}`) : 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100'}
+                      src={getImageUrl(fUser.avatar, 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100')}
                       alt={fUser.username}
                       className="h-10 w-10 rounded-full object-cover"
                     />
@@ -248,7 +248,7 @@ export default function Profile() {
                     className="flex items-center gap-3 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 p-4 rounded-2xl hover:shadow-md transition-shadow"
                   >
                     <img
-                      src={fUser.avatar ? (fUser.avatar.startsWith('http') ? fUser.avatar : `http://localhost:5000${fUser.avatar}`) : 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100'}
+                      src={getImageUrl(fUser.avatar, 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100')}
                       alt={fUser.username}
                       className="h-10 w-10 rounded-full object-cover"
                     />
