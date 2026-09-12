@@ -52,7 +52,7 @@ export default function Feed() {
             </div>
           )}
 
-          {data?.recipes.length === 0 ? (
+          {!data?.recipes || data.recipes.length === 0 ? (
             <div className="text-center py-16 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl p-8">
               <div className="text-4xl mb-4">🥣</div>
               <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-1">No recipes available</h3>
@@ -60,7 +60,7 @@ export default function Feed() {
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {data.recipes.map((recipe) => (
+              {data.recipes?.map((recipe) => (
                 <RecipeCard key={recipe._id} recipe={recipe} />
               ))}
             </div>

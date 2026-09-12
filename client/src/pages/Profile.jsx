@@ -87,7 +87,7 @@ export default function Profile() {
 
   const { user, recipes } = data;
   const isOwnProfile = currentUser && currentUser.id === user.id;
-  const isFollowing = currentUser && user.followers.includes(currentUser.id);
+  const isFollowing = currentUser && Array.isArray(user?.followers) && user.followers.includes(currentUser.id);
 
   const handleFollowAction = () => {
     if (isFollowing) {
@@ -152,7 +152,7 @@ export default function Profile() {
               className={`flex items-center gap-1.5 text-xs font-bold ${activeTab === 'recipes' ? 'text-brand-500' : 'text-slate-500'}`}
             >
               <FileText className="h-4 w-4" />
-              <span>{recipes.length} Recipes</span>
+              <span>{recipes?.length || 0} Recipes</span>
             </button>
             <button
               onClick={() => setActiveTab('followers')}
@@ -178,14 +178,14 @@ export default function Profile() {
         {activeTab === 'recipes' && (
           <div className="space-y-4">
             <h3 className="text-lg font-black">Shared Recipes</h3>
-            {recipes.length === 0 ? (
+            {!recipes || recipes.length === 0 ? (
               <div className="text-center py-12 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl p-6">
                 <span className="text-3xl">🍲</span>
                 <p className="text-slate-400 text-xs mt-2">No recipes uploaded yet.</p>
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                {recipes.map((recipe) => (
+                {recipes?.map((recipe) => (
                   <RecipeCard key={recipe._id} recipe={recipe} />
                 ))}
               </div>
@@ -199,13 +199,13 @@ export default function Profile() {
             <h3 className="text-lg font-black">Followers</h3>
             {loadingFollowers ? (
               <div className="h-20 animate-pulse bg-slate-100 dark:bg-slate-800 rounded-xl" />
-            ) : !followersList || followersList.length === 0 ? (
+            ) : !followersList || !Array.isArray(followersList) || followersList.length === 0 ? (
               <div className="text-center py-10 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl">
                 <p className="text-slate-400 text-xs">No followers yet.</p>
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {followersList.map((fUser) => (
+                {followersList?.map((fUser) => (
                   <Link
                     key={fUser._id}
                     to={`/profile/${fUser.username}`}
@@ -234,13 +234,13 @@ export default function Profile() {
             <h3 className="text-lg font-black">Following</h3>
             {loadingFollowing ? (
               <div className="h-20 animate-pulse bg-slate-100 dark:bg-slate-800 rounded-xl" />
-            ) : !followingList || followingList.length === 0 ? (
+            ) : !followingList || !Array.isArray(followingList) || followingList.length === 0 ? (
               <div className="text-center py-10 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl">
                 <p className="text-slate-400 text-xs">Not following anyone yet.</p>
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {followingList.map((fUser) => (
+                {followingList?.map((fUser) => (
                   <Link
                     key={fUser._id}
                     to={`/profile/${fUser.username}`}

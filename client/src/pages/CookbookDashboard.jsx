@@ -115,7 +115,7 @@ export default function CookbookDashboard() {
           <div className="lg:col-span-1 space-y-4">
             <h3 className="text-sm font-bold uppercase tracking-wider text-slate-400">My Collections</h3>
             
-            {cookbooks.length === 0 ? (
+            {!cookbooks || !Array.isArray(cookbooks) || cookbooks.length === 0 ? (
               <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 p-8 rounded-3xl text-center space-y-3">
                 <span className="text-3xl">📂</span>
                 <h4 className="font-bold text-sm">No Cookbooks yet</h4>
@@ -137,7 +137,7 @@ export default function CookbookDashboard() {
                       <h4 className="font-bold text-sm truncate text-slate-850 dark:text-slate-150">{cb.title}</h4>
                       <p className="text-[10px] text-slate-400 line-clamp-1">{cb.description || 'No description provided'}</p>
                       <span className="inline-block text-[9px] font-bold uppercase tracking-wider text-brand-500 bg-brand-50 dark:bg-brand-950/40 px-2 py-0.5 rounded-full mt-2">
-                        {cb.recipes.length} Recipes
+                        {cb.recipes?.length || 0} Recipes
                       </span>
                     </div>
 
@@ -175,7 +175,7 @@ export default function CookbookDashboard() {
                   <p className="text-xs text-slate-400 mt-1">{selectedCookbook.description || 'Saved recipe collection box.'}</p>
                 </div>
 
-                {selectedCookbook.recipes.length === 0 ? (
+                {!selectedCookbook?.recipes || selectedCookbook.recipes.length === 0 ? (
                   <div className="text-center py-12 border-2 border-dashed border-slate-150 dark:border-slate-800 rounded-2xl text-slate-400">
                     <Utensils className="h-8 w-8 mx-auto mb-2 text-slate-300" />
                     <p className="text-xs font-semibold">This collection has no recipes yet.</p>
@@ -183,7 +183,7 @@ export default function CookbookDashboard() {
                   </div>
                 ) : (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {selectedCookbook.recipes.map((recipe) => (
+                    {selectedCookbook.recipes?.map((recipe) => (
                       <div key={recipe._id} className="relative group bg-slate-50 dark:bg-slate-950/20 border border-slate-100 dark:border-slate-850 p-3 rounded-2xl flex gap-3 hover:shadow-md transition-shadow">
                         <Link to={`/recipes/${recipe._id}`} className="block h-16 w-16 rounded-xl overflow-hidden shrink-0 bg-slate-100">
                           <img

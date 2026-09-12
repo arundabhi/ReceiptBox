@@ -241,7 +241,7 @@ export default function SearchRecipes() {
       {/* RESULTS GRID VIEW */}
       <div>
         <h3 className="text-sm font-bold text-slate-400 mb-4 uppercase tracking-wider">
-          Results Found ({data ? data.length : 0})
+          Results Found ({Array.isArray(data) ? data.length : 0})
         </h3>
 
         {isLoading ? (
@@ -250,7 +250,7 @@ export default function SearchRecipes() {
           <div className="text-center py-10 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl">
             <p className="text-red-500 font-bold">Failed to process aggregation query</p>
           </div>
-        ) : data?.length === 0 ? (
+        ) : !Array.isArray(data) || data.length === 0 ? (
           <div className="text-center py-16 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-3xl p-12">
             <span className="text-4xl">🔍</span>
             <h4 className="font-bold text-slate-700 dark:text-slate-300 mt-3 mb-1">No matching recipes</h4>
@@ -260,7 +260,7 @@ export default function SearchRecipes() {
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {data?.map((recipe) => (
+            {data.map((recipe) => (
               <RecipeCard key={recipe._id} recipe={recipe} />
             ))}
           </div>

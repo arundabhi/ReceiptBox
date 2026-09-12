@@ -193,7 +193,7 @@ export default function RecipeDetails() {
           <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between text-white">
             <div>
               <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight">{recipe.title}</h1>
-              {recipe.tags && recipe.tags.length > 0 && (
+              {recipe.tags && Array.isArray(recipe.tags) && recipe.tags.length > 0 && (
                 <div className="flex flex-wrap gap-1 mt-2">
                   {recipe.tags.map((tag) => (
                     <span key={tag} className="text-[10px] uppercase font-bold tracking-wider bg-brand-500 px-2 py-0.5 rounded">
@@ -331,7 +331,7 @@ export default function RecipeDetails() {
               </h3>
               
               <ul className="space-y-2.5">
-                {recipe.ingredients.map((ing, idx) => (
+                {recipe.ingredients?.map((ing, idx) => (
                   <li
                     key={idx}
                     onClick={() => toggleIngredient(idx)}
@@ -358,7 +358,7 @@ export default function RecipeDetails() {
               </h3>
 
               <div className="space-y-4">
-                {recipe.instructions.map((step, idx) => (
+                {recipe.instructions?.map((step, idx) => (
                   <div
                     key={idx}
                     onClick={() => toggleStep(idx)}
@@ -518,7 +518,7 @@ export default function RecipeDetails() {
             </p>
 
             <div className="space-y-2 max-h-[250px] overflow-y-auto">
-              {!cookbooksList || cookbooksList.length === 0 ? (
+              {!cookbooksList || !Array.isArray(cookbooksList) || cookbooksList.length === 0 ? (
                 <div className="text-center py-6 text-slate-405 text-xs font-semibold">
                   You don't have any cookbooks yet! Make one in your <Link to="/cookbooks" className="text-brand-500 hover:underline">dashboard</Link>.
                 </div>
@@ -532,7 +532,7 @@ export default function RecipeDetails() {
                   >
                     <span>{cb.title}</span>
                     <span className="text-[10px] text-slate-450 dark:text-slate-500 font-bold bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-full">
-                      {cb.recipes.length} recipes
+                      {cb.recipes?.length || 0} recipes
                     </span>
                   </button>
                 ))

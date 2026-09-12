@@ -128,7 +128,7 @@ export default function Home() {
             <p className="text-red-500 font-bold mb-2">Oops! Something went wrong.</p>
             <p className="text-slate-400 text-xs">Failed to load recipes. Check your database connection.</p>
           </div>
-        ) : data?.recipes.length === 0 ? (
+        ) : !data?.recipes || data.recipes.length === 0 ? (
           <div className="text-center py-16 bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-12">
             <div className="text-4xl mb-4">🍽️</div>
             <h3 className="text-lg font-bold mb-1 text-slate-800 dark:text-slate-155">No recipes found</h3>
@@ -139,7 +139,7 @@ export default function Home() {
         ) : (
           <div className="space-y-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {data?.recipes.map((recipe) => (
+              {data?.recipes?.map((recipe) => (
                 <RecipeCard key={recipe._id} recipe={recipe} />
               ))}
             </div>
