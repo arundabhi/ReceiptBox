@@ -95,10 +95,10 @@ export default function Home() {
             <select
               value={sort}
               onChange={(e) => { setSort(e.target.value); setPage(1); }}
-              className="text-xs font-bold border border-slate-200 dark:border-slate-850 rounded-xl px-3 py-2 bg-white dark:bg-slate-905 focus:outline-none focus:ring-1 focus:ring-brand-500"
+              className="text-xs font-bold border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-brand-500 cursor-pointer shadow-sm"
             >
-              <option value="recent">Latest Dishes</option>
-              <option value="popular">Highest Rated</option>
+              <option value="recent" className="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100">Latest Dishes</option>
+              <option value="popular" className="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100">Highest Rated</option>
             </select>
           </div>
         </div>

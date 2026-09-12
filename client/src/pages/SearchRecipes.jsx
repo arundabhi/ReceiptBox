@@ -134,12 +134,12 @@ export default function SearchRecipes() {
               <select
                 value={difficulty}
                 onChange={(e) => setDifficulty(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 dark:bg-slate-950/40 text-sm focus:outline-none focus:ring-1 focus:ring-brand-500"
+                className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 text-sm focus:outline-none focus:ring-1 focus:ring-brand-500 cursor-pointer"
               >
-                <option value="">Any Difficulty</option>
-                <option value="easy">Easy</option>
-                <option value="medium">Medium</option>
-                <option value="hard">Hard</option>
+                <option value="" className="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100">Any Difficulty</option>
+                <option value="easy" className="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100">Easy</option>
+                <option value="medium" className="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100">Medium</option>
+                <option value="hard" className="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100">Hard</option>
               </select>
             </div>
 
